@@ -1,0 +1,32 @@
+
+<div class="todo-item" [class.completed]="todo.completed">
+    <input type="checkbox" [checked]="todo.completed" (change)="toggleTodoComplete()">
+    
+ 
+    <span *ngIf="!editing" (dblclick)="startEditing()">
+      {{ todo.title }}
+    </span>
+    
+    <input *ngIf="editing" [(ngModel)]="editTitle" (blur)="saveTitle()" (keyup.enter)="saveTitle()" (keyup.esc)="cancelEditing()">
+    <button (click)=" updateTodoTitle()">update</button>
+    <button (click)="saveTitle()">Save</button>
+    <button (click)="deleteTodo()">Delete</button>
+  </div>
+  <style>
+    .todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.todo-item.completed span {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.todo-item input[type="text"] {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+  </style>
